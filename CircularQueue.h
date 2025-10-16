@@ -12,7 +12,7 @@ class CircularQueue{
     };
     // Only needed one pointer here to point to the last one
     // First node: rear --> next 
-    Node ** rear;
+    Node * rear;
 
 
     public:
@@ -24,7 +24,7 @@ class CircularQueue{
     void enqueue(int value);
 
     //Dequeue remove from front of queue
-    void dequeue();
+    int dequeue();
 
     //Peek look at front without removing it
     int peek();

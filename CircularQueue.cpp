@@ -2,8 +2,12 @@
 #include <iostream>
 using namespace std;
 
-// Node constructor 
+// Constructor
+CircularQueue::CircularQueue() {
+    rear = nullptr;
+}
 
+// Node constructor 
 CircularQueue::Node::Node(int value){
     data = value;
     next = nullptr;
@@ -12,7 +16,7 @@ CircularQueue::Node::Node(int value){
 // Memory clean up when queue is destroyed
 CircularQueue::~CircularQueue(){
     while (!isEmpty()){
-        dequeue();
+        dequeue();  
     }
 }
 
@@ -32,38 +36,35 @@ void CircularQueue::enqueue(int value) {
         rear->next = rear;
     } else {
         // Add to end of existing queue
-        newNode -> next = rear -> next;  // New node points to front
-        rear -> next = newNode;        // Old rear points to new node
+        newNode->next = rear->next;  // New node points to front
+        rear->next = newNode;        // Old rear points to new node
         rear = newNode;              // New node becomes rear
     }
 }
 
-// Remove element from front of queue
-int CircularQueue::dequeue{
+// Remove element from front of queue - FIXED
+int CircularQueue::dequeue() {
     if (isEmpty()){
-        cout < "Queue is empty!" << endl;
-        return - 1;
+        cout << "Queue is empty!" << endl;  // Fixed << operator
+        return -1;  // Fixed spacing
     }
-    // Front is always rear -> next
-    Node* front = rear -> next;
-    int value = front -> data;
+    
+    // Front is always rear->next
+    Node* front = rear->next;
+    int value = front->data;
     
     if (front == rear){
         // Only one element - queue becomes empty
         delete front;
         rear = nullptr;
-
-    } else{
+    } else {
         // Multiple elements - remove front
-        rear -> next = front -> next; 
+        rear->next = front->next; 
         delete front;
     }
-
+    
     return value;
-
-
 }
-
 
 //Look at front element without removing it
 int CircularQueue::peek() {
